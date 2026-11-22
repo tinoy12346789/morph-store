@@ -1,0 +1,1793 @@
+{
+ "schema": 1,
+ "name": "Morph Store",
+ "updated": "2026-11-22",
+ "packs": [
+  {
+   "id": "engine.ffmpeg",
+   "title": "ffmpeg Engine",
+   "subtitle": "Unlocks MP3, WebM, MKV, AVI, FLAC, Opus, animated GIF, WebP and more.",
+   "description": "The free converter that powers most formats macOS can't make on its own.",
+   "category": "engine",
+   "symbol": "gearshape.2.fill",
+   "tint": "blue",
+   "version": "6.0",
+   "sizeMb": 45,
+   "license": "GPL (third-party build by osxexperts.net)",
+   "author": "FFmpeg",
+   "downloads": {
+    "arm64": {
+     "url": "https://github.com/eugeneware/ffmpeg-static/releases/download/b6.0/ffmpeg-darwin-arm64.gz",
+     "sha256": "6be74d6f449889c2e87a75873894f8520cad56c08ac76f2a628d85b0519daaca",
+     "archive": "gz",
+     "binary": "ffmpeg",
+     "test": [
+      "-version"
+     ]
+    },
+    "x64": {
+     "url": "https://github.com/eugeneware/ffmpeg-static/releases/download/b6.0/ffmpeg-darwin-x64.gz",
+     "sha256": "a12354fce7eb62361473bbe10d53a1893695babd35869ec8e92e5dfea8d0440b",
+     "archive": "gz",
+     "binary": "ffmpeg",
+     "test": [
+      "-version"
+     ]
+    }
+   }
+  },
+  {
+   "id": "pack.pro-video",
+   "title": "Pro Video",
+   "subtitle": "ProRes, DNxHR and Motion JPEG for editing in Final Cut, Premiere or DaVinci.",
+   "category": "video",
+   "symbol": "film.stack.fill",
+   "tint": "purple",
+   "version": "1.0",
+   "sizeMb": 0.01,
+   "license": "Free",
+   "author": "Morph",
+   "requires": [
+    "ffmpeg"
+   ],
+   "formats": [
+    {
+     "id": "prores422",
+     "title": "ProRes 422",
+     "ext": "mov",
+     "family": "video",
+     "variants": [
+      {
+       "needs": [
+        "prores_ks"
+       ],
+       "args": [
+        "-c:v",
+        "prores_ks",
+        "-profile:v",
+        "2",
+        "-vendor",
+        "apl0",
+        "-pix_fmt",
+        "yuv422p10le",
+        "-c:a",
+        "pcm_s16le"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "prores422hq",
+     "title": "ProRes 422 HQ",
+     "ext": "mov",
+     "family": "video",
+     "variants": [
+      {
+       "needs": [
+        "prores_ks"
+       ],
+       "args": [
+        "-c:v",
+        "prores_ks",
+        "-profile:v",
+        "3",
+        "-vendor",
+        "apl0",
+        "-pix_fmt",
+        "yuv422p10le",
+        "-c:a",
+        "pcm_s16le"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "prores4444",
+     "title": "ProRes 4444",
+     "ext": "mov",
+     "family": "video",
+     "variants": [
+      {
+       "needs": [
+        "prores_ks"
+       ],
+       "args": [
+        "-c:v",
+        "prores_ks",
+        "-profile:v",
+        "4",
+        "-vendor",
+        "apl0",
+        "-pix_fmt",
+        "yuv444p10le",
+        "-c:a",
+        "pcm_s16le"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "dnxhr",
+     "title": "DNxHR HQ",
+     "ext": "mov",
+     "family": "video",
+     "variants": [
+      {
+       "needs": [
+        "dnxhd"
+       ],
+       "args": [
+        "-c:v",
+        "dnxhd",
+        "-profile:v",
+        "dnxhr_hq",
+        "-pix_fmt",
+        "yuv422p",
+        "-c:a",
+        "pcm_s16le"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "mjpeg",
+     "title": "Motion JPEG",
+     "ext": "mov",
+     "family": "video",
+     "variants": [
+      {
+       "needs": [
+        "mjpeg"
+       ],
+       "args": [
+        "-c:v",
+        "mjpeg",
+        "-q:v",
+        "2",
+        "-pix_fmt",
+        "yuvj422p",
+        "-c:a",
+        "pcm_s16le"
+       ]
+      }
+     ]
+    }
+   ],
+   "featured": true
+  },
+  {
+   "id": "pack.modern-video",
+   "title": "Modern Video",
+   "subtitle": "AV1 for tiny files, plus VP8 and HEVC in MKV.",
+   "category": "video",
+   "symbol": "sparkles.tv.fill",
+   "tint": "pink",
+   "version": "1.0",
+   "sizeMb": 0.01,
+   "license": "Free",
+   "author": "Morph",
+   "requires": [
+    "ffmpeg"
+   ],
+   "formats": [
+    {
+     "id": "av1mp4",
+     "title": "AV1 (MP4)",
+     "ext": "mp4",
+     "family": "video",
+     "variants": [
+      {
+       "needs": [
+        "libsvtav1"
+       ],
+       "args": {
+        "best": [
+         "-c:v",
+         "libsvtav1",
+         "-crf",
+         "26",
+         "-preset",
+         "8",
+         "-pix_fmt",
+         "yuv420p",
+         "-c:a",
+         "aac",
+         "-b:a",
+         "256k",
+         "-movflags",
+         "+faststart"
+        ],
+        "balanced": [
+         "-c:v",
+         "libsvtav1",
+         "-crf",
+         "34",
+         "-preset",
+         "8",
+         "-pix_fmt",
+         "yuv420p",
+         "-c:a",
+         "aac",
+         "-b:a",
+         "192k",
+         "-movflags",
+         "+faststart"
+        ],
+        "small": [
+         "-c:v",
+         "libsvtav1",
+         "-crf",
+         "42",
+         "-preset",
+         "8",
+         "-pix_fmt",
+         "yuv420p",
+         "-c:a",
+         "aac",
+         "-b:a",
+         "128k",
+         "-movflags",
+         "+faststart"
+        ]
+       }
+      },
+      {
+       "needs": [
+        "libaom-av1"
+       ],
+       "args": {
+        "best": [
+         "-c:v",
+         "libaom-av1",
+         "-crf",
+         "26",
+         "-b:v",
+         "0",
+         "-cpu-used",
+         "8",
+         "-row-mt",
+         "1",
+         "-pix_fmt",
+         "yuv420p",
+         "-c:a",
+         "aac",
+         "-b:a",
+         "256k",
+         "-movflags",
+         "+faststart"
+        ],
+        "balanced": [
+         "-c:v",
+         "libaom-av1",
+         "-crf",
+         "34",
+         "-b:v",
+         "0",
+         "-cpu-used",
+         "8",
+         "-row-mt",
+         "1",
+         "-pix_fmt",
+         "yuv420p",
+         "-c:a",
+         "aac",
+         "-b:a",
+         "192k",
+         "-movflags",
+         "+faststart"
+        ],
+        "small": [
+         "-c:v",
+         "libaom-av1",
+         "-crf",
+         "42",
+         "-b:v",
+         "0",
+         "-cpu-used",
+         "8",
+         "-row-mt",
+         "1",
+         "-pix_fmt",
+         "yuv420p",
+         "-c:a",
+         "aac",
+         "-b:a",
+         "128k",
+         "-movflags",
+         "+faststart"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "id": "av1webm",
+     "title": "AV1 (WebM)",
+     "ext": "webm",
+     "family": "video",
+     "variants": [
+      {
+       "needs": [
+        "libsvtav1",
+        "libopus"
+       ],
+       "args": {
+        "best": [
+         "-c:v",
+         "libsvtav1",
+         "-crf",
+         "26",
+         "-preset",
+         "8",
+         "-pix_fmt",
+         "yuv420p",
+         "-c:a",
+         "libopus",
+         "-b:a",
+         "160k"
+        ],
+        "balanced": [
+         "-c:v",
+         "libsvtav1",
+         "-crf",
+         "34",
+         "-preset",
+         "8",
+         "-pix_fmt",
+         "yuv420p",
+         "-c:a",
+         "libopus",
+         "-b:a",
+         "128k"
+        ],
+        "small": [
+         "-c:v",
+         "libsvtav1",
+         "-crf",
+         "42",
+         "-preset",
+         "8",
+         "-pix_fmt",
+         "yuv420p",
+         "-c:a",
+         "libopus",
+         "-b:a",
+         "96k"
+        ]
+       }
+      },
+      {
+       "needs": [
+        "libaom-av1",
+        "libopus"
+       ],
+       "args": {
+        "best": [
+         "-c:v",
+         "libaom-av1",
+         "-crf",
+         "26",
+         "-b:v",
+         "0",
+         "-cpu-used",
+         "8",
+         "-row-mt",
+         "1",
+         "-pix_fmt",
+         "yuv420p",
+         "-c:a",
+         "libopus",
+         "-b:a",
+         "160k"
+        ],
+        "balanced": [
+         "-c:v",
+         "libaom-av1",
+         "-crf",
+         "34",
+         "-b:v",
+         "0",
+         "-cpu-used",
+         "8",
+         "-row-mt",
+         "1",
+         "-pix_fmt",
+         "yuv420p",
+         "-c:a",
+         "libopus",
+         "-b:a",
+         "128k"
+        ],
+        "small": [
+         "-c:v",
+         "libaom-av1",
+         "-crf",
+         "42",
+         "-b:v",
+         "0",
+         "-cpu-used",
+         "8",
+         "-row-mt",
+         "1",
+         "-pix_fmt",
+         "yuv420p",
+         "-c:a",
+         "libopus",
+         "-b:a",
+         "96k"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "id": "vp8webm",
+     "title": "VP8 (WebM)",
+     "ext": "webm",
+     "family": "video",
+     "variants": [
+      {
+       "needs": [
+        "libvpx",
+        "libvorbis"
+       ],
+       "args": {
+        "best": [
+         "-c:v",
+         "libvpx",
+         "-crf",
+         "8",
+         "-b:v",
+         "4M",
+         "-deadline",
+         "good",
+         "-cpu-used",
+         "2",
+         "-pix_fmt",
+         "yuv420p",
+         "-c:a",
+         "libvorbis",
+         "-q:a",
+         "6"
+        ],
+        "balanced": [
+         "-c:v",
+         "libvpx",
+         "-crf",
+         "12",
+         "-b:v",
+         "4M",
+         "-deadline",
+         "good",
+         "-cpu-used",
+         "2",
+         "-pix_fmt",
+         "yuv420p",
+         "-c:a",
+         "libvorbis",
+         "-q:a",
+         "5"
+        ],
+        "small": [
+         "-c:v",
+         "libvpx",
+         "-crf",
+         "20",
+         "-b:v",
+         "4M",
+         "-deadline",
+         "good",
+         "-cpu-used",
+         "2",
+         "-pix_fmt",
+         "yuv420p",
+         "-c:a",
+         "libvorbis",
+         "-q:a",
+         "4"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "id": "hevcmkv",
+     "title": "HEVC (MKV)",
+     "ext": "mkv",
+     "family": "video",
+     "variants": [
+      {
+       "needs": [
+        "libx265"
+       ],
+       "args": {
+        "best": [
+         "-c:v",
+         "libx265",
+         "-preset",
+         "medium",
+         "-crf",
+         "22",
+         "-pix_fmt",
+         "yuv420p",
+         "-tag:v",
+         "hvc1",
+         "-x265-params",
+         "log-level=error",
+         "-c:a",
+         "aac",
+         "-b:a",
+         "256k"
+        ],
+        "balanced": [
+         "-c:v",
+         "libx265",
+         "-preset",
+         "medium",
+         "-crf",
+         "26",
+         "-pix_fmt",
+         "yuv420p",
+         "-tag:v",
+         "hvc1",
+         "-x265-params",
+         "log-level=error",
+         "-c:a",
+         "aac",
+         "-b:a",
+         "192k"
+        ],
+        "small": [
+         "-c:v",
+         "libx265",
+         "-preset",
+         "medium",
+         "-crf",
+         "30",
+         "-pix_fmt",
+         "yuv420p",
+         "-tag:v",
+         "hvc1",
+         "-x265-params",
+         "log-level=error",
+         "-c:a",
+         "aac",
+         "-b:a",
+         "128k"
+        ]
+       }
+      },
+      {
+       "needs": [
+        "hevc_videotoolbox"
+       ],
+       "args": {
+        "best": [
+         "-c:v",
+         "hevc_videotoolbox",
+         "-q:v",
+         "65",
+         "-tag:v",
+         "hvc1",
+         "-c:a",
+         "aac",
+         "-b:a",
+         "256k"
+        ],
+        "balanced": [
+         "-c:v",
+         "hevc_videotoolbox",
+         "-q:v",
+         "50",
+         "-tag:v",
+         "hvc1",
+         "-c:a",
+         "aac",
+         "-b:a",
+         "192k"
+        ],
+        "small": [
+         "-c:v",
+         "hevc_videotoolbox",
+         "-q:v",
+         "35",
+         "-tag:v",
+         "hvc1",
+         "-c:a",
+         "aac",
+         "-b:a",
+         "128k"
+        ]
+       }
+      }
+     ]
+    }
+   ],
+   "featured": true
+  },
+  {
+   "id": "pack.studio-audio",
+   "title": "Studio Audio",
+   "subtitle": "WavPack, TTA, 32-bit float WAV, Ogg FLAC, MKA, AU and MP3 VBR.",
+   "category": "audio",
+   "symbol": "waveform.circle.fill",
+   "tint": "orange",
+   "version": "1.0",
+   "sizeMb": 0.01,
+   "license": "Free",
+   "author": "Morph",
+   "requires": [
+    "ffmpeg"
+   ],
+   "formats": [
+    {
+     "id": "wv",
+     "title": "WavPack",
+     "ext": "wv",
+     "family": "audio",
+     "variants": [
+      {
+       "needs": [
+        "wavpack"
+       ],
+       "args": [
+        "-vn",
+        "-c:a",
+        "wavpack"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "tta",
+     "title": "TTA",
+     "ext": "tta",
+     "family": "audio",
+     "variants": [
+      {
+       "needs": [
+        "tta"
+       ],
+       "args": [
+        "-vn",
+        "-c:a",
+        "tta"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "wav32",
+     "title": "WAV (32-bit float)",
+     "ext": "wav",
+     "family": "audio",
+     "variants": [
+      {
+       "needs": [],
+       "args": [
+        "-vn",
+        "-c:a",
+        "pcm_f32le"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "oga",
+     "title": "FLAC in Ogg",
+     "ext": "oga",
+     "family": "audio",
+     "variants": [
+      {
+       "needs": [
+        "flac"
+       ],
+       "args": [
+        "-vn",
+        "-c:a",
+        "flac",
+        "-f",
+        "ogg"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "mka",
+     "title": "FLAC in Matroska (MKA)",
+     "ext": "mka",
+     "family": "audio",
+     "variants": [
+      {
+       "needs": [
+        "flac"
+       ],
+       "args": [
+        "-vn",
+        "-c:a",
+        "flac"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "au",
+     "title": "AU",
+     "ext": "au",
+     "family": "audio",
+     "variants": [
+      {
+       "needs": [],
+       "args": [
+        "-vn",
+        "-c:a",
+        "pcm_s16be"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "mp3vbr",
+     "title": "MP3 (VBR)",
+     "ext": "mp3",
+     "family": "audio",
+     "variants": [
+      {
+       "needs": [
+        "libmp3lame"
+       ],
+       "args": {
+        "best": [
+         "-vn",
+         "-c:a",
+         "libmp3lame",
+         "-q:a",
+         "0",
+         "-id3v2_version",
+         "3"
+        ],
+        "balanced": [
+         "-vn",
+         "-c:a",
+         "libmp3lame",
+         "-q:a",
+         "2",
+         "-id3v2_version",
+         "3"
+        ],
+        "small": [
+         "-vn",
+         "-c:a",
+         "libmp3lame",
+         "-q:a",
+         "5",
+         "-id3v2_version",
+         "3"
+        ]
+       }
+      }
+     ]
+    }
+   ],
+   "featured": true
+  },
+  {
+   "id": "pack.photo-extras",
+   "title": "Photo Extras",
+   "subtitle": "Lossless WebP, TGA and PCX for designers and old software.",
+   "category": "photo",
+   "symbol": "photo.stack.fill",
+   "tint": "teal",
+   "version": "1.1",
+   "sizeMb": 0.01,
+   "license": "Free",
+   "author": "Morph",
+   "requires": [
+    "ffmpeg"
+   ],
+   "inputs": [
+    "pcx"
+   ],
+   "formats": [
+    {
+     "id": "webpll",
+     "title": "WebP (Lossless)",
+     "ext": "webp",
+     "family": "image",
+     "variants": [
+      {
+       "needs": [
+        "libwebp"
+       ],
+       "args": [
+        "-c:v",
+        "libwebp",
+        "-lossless",
+        "1",
+        "-compression_level",
+        "6"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "tga",
+     "title": "TGA",
+     "ext": "tga",
+     "family": "image",
+     "variants": [
+      {
+       "needs": [
+        "targa"
+       ],
+       "args": [
+        "-c:v",
+        "targa"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "pcx",
+     "title": "PCX",
+     "ext": "pcx",
+     "family": "image",
+     "variants": [
+      {
+       "needs": [
+        "pcx"
+       ],
+       "args": [
+        "-c:v",
+        "pcx",
+        "-pix_fmt",
+        "rgb24"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "pack.film-frames",
+   "title": "Film & Scientific Frames",
+   "subtitle": "OpenEXR, DPX and SGI, the image formats of film, VFX and science.",
+   "category": "photo",
+   "symbol": "film",
+   "tint": "green",
+   "version": "1.0",
+   "sizeMb": 0.01,
+   "license": "Free",
+   "author": "Morph",
+   "requires": [
+    "ffmpeg"
+   ],
+   "inputs": [
+    "dpx",
+    "sgi"
+   ],
+   "formats": [
+    {
+     "id": "exr",
+     "title": "OpenEXR",
+     "ext": "exr",
+     "family": "image",
+     "variants": [
+      {
+       "needs": [
+        "exr"
+       ],
+       "args": [
+        "-c:v",
+        "exr"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "dpx",
+     "title": "DPX (16-bit)",
+     "ext": "dpx",
+     "family": "image",
+     "variants": [
+      {
+       "needs": [
+        "dpx"
+       ],
+       "args": [
+        "-c:v",
+        "dpx",
+        "-pix_fmt",
+        "rgb48le"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "sgi",
+     "title": "SGI",
+     "ext": "sgi",
+     "family": "image",
+     "variants": [
+      {
+       "needs": [
+        "sgi"
+       ],
+       "args": [
+        "-c:v",
+        "sgi"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "pack.netpbm-retro",
+   "title": "Netpbm & Retro Images",
+   "subtitle": "PPM, PGM, PBM, PAM, XWD, Sun Raster and QOI for old tools and programmers.",
+   "category": "photo",
+   "symbol": "square.grid.3x3.fill",
+   "tint": "gray",
+   "version": "1.0",
+   "sizeMb": 0.01,
+   "license": "Free",
+   "author": "Morph",
+   "requires": [
+    "ffmpeg"
+   ],
+   "inputs": [
+    "ppm",
+    "pgm",
+    "pbm",
+    "pam",
+    "xwd",
+    "ras",
+    "qoi"
+   ],
+   "formats": [
+    {
+     "id": "ppm",
+     "title": "PPM (color)",
+     "ext": "ppm",
+     "family": "image",
+     "variants": [
+      {
+       "needs": [
+        "ppm"
+       ],
+       "args": [
+        "-c:v",
+        "ppm",
+        "-pix_fmt",
+        "rgb24"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "pgm",
+     "title": "PGM (gray)",
+     "ext": "pgm",
+     "family": "image",
+     "variants": [
+      {
+       "needs": [
+        "pgm"
+       ],
+       "args": [
+        "-c:v",
+        "pgm",
+        "-pix_fmt",
+        "gray"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "pbm",
+     "title": "PBM (black & white)",
+     "ext": "pbm",
+     "family": "image",
+     "variants": [
+      {
+       "needs": [
+        "pbm"
+       ],
+       "args": [
+        "-c:v",
+        "pbm",
+        "-pix_fmt",
+        "monob"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "pam",
+     "title": "PAM",
+     "ext": "pam",
+     "family": "image",
+     "variants": [
+      {
+       "needs": [
+        "pam"
+       ],
+       "args": [
+        "-c:v",
+        "pam",
+        "-pix_fmt",
+        "rgba"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "xwd",
+     "title": "XWD",
+     "ext": "xwd",
+     "family": "image",
+     "variants": [
+      {
+       "needs": [
+        "xwd"
+       ],
+       "args": [
+        "-c:v",
+        "xwd",
+        "-pix_fmt",
+        "rgb24"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "ras",
+     "title": "Sun Raster",
+     "ext": "ras",
+     "family": "image",
+     "variants": [
+      {
+       "needs": [
+        "sunrast"
+       ],
+       "args": [
+        "-c:v",
+        "sunrast",
+        "-pix_fmt",
+        "rgb24"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "qoi",
+     "title": "QOI",
+     "ext": "qoi",
+     "family": "image",
+     "variants": [
+      {
+       "needs": [
+        "qoi"
+       ],
+       "args": [
+        "-c:v",
+        "qoi"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "pack.broadcast-archive",
+   "title": "Broadcast & Archive",
+   "subtitle": "MXF, DV and lossless FFV1 and HuffYUV for broadcast and long-term storage.",
+   "category": "video",
+   "symbol": "antenna.radiowaves.left.and.right",
+   "tint": "blue",
+   "version": "1.0",
+   "sizeMb": 0.01,
+   "license": "Free",
+   "author": "Morph",
+   "requires": [
+    "ffmpeg"
+   ],
+   "inputs": [
+    "mxf",
+    "dv",
+    "dif"
+   ],
+   "formats": [
+    {
+     "id": "mxf",
+     "title": "MXF (MPEG-2 422)",
+     "ext": "mxf",
+     "family": "video",
+     "variants": [
+      {
+       "needs": [
+        "mpeg2video",
+        "pcm_s16le"
+       ],
+       "args": {
+        "best": [
+         "-c:v",
+         "mpeg2video",
+         "-q:v",
+         "2",
+         "-pix_fmt",
+         "yuv422p",
+         "-c:a",
+         "pcm_s16le",
+         "-ar",
+         "48000",
+         "-ac",
+         "2",
+         "-f",
+         "mxf"
+        ],
+        "balanced": [
+         "-c:v",
+         "mpeg2video",
+         "-q:v",
+         "3",
+         "-pix_fmt",
+         "yuv422p",
+         "-c:a",
+         "pcm_s16le",
+         "-ar",
+         "48000",
+         "-ac",
+         "2",
+         "-f",
+         "mxf"
+        ],
+        "small": [
+         "-c:v",
+         "mpeg2video",
+         "-q:v",
+         "5",
+         "-pix_fmt",
+         "yuv422p",
+         "-c:a",
+         "pcm_s16le",
+         "-ar",
+         "48000",
+         "-ac",
+         "2",
+         "-f",
+         "mxf"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "id": "dvpal",
+     "title": "DV (PAL)",
+     "ext": "dv",
+     "family": "video",
+     "variants": [
+      {
+       "needs": [
+        "dvvideo",
+        "pcm_s16le"
+       ],
+       "args": [
+        "-vf",
+        "scale=720:576:force_original_aspect_ratio=decrease,pad=720:576:(ow-iw)/2:(oh-ih)/2,setsar=16/15",
+        "-r",
+        "25",
+        "-c:v",
+        "dvvideo",
+        "-pix_fmt",
+        "yuv420p",
+        "-af",
+        "apad=pad_dur=60",
+        "-c:a",
+        "pcm_s16le",
+        "-ar",
+        "48000",
+        "-ac",
+        "2",
+        "-f",
+        "dv"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "dvntsc",
+     "title": "DV (NTSC)",
+     "ext": "dv",
+     "family": "video",
+     "variants": [
+      {
+       "needs": [
+        "dvvideo",
+        "pcm_s16le"
+       ],
+       "args": [
+        "-vf",
+        "scale=720:480:force_original_aspect_ratio=decrease,pad=720:480:(ow-iw)/2:(oh-ih)/2,setsar=8/9",
+        "-r",
+        "30000/1001",
+        "-c:v",
+        "dvvideo",
+        "-pix_fmt",
+        "yuv411p",
+        "-af",
+        "apad=pad_dur=60",
+        "-c:a",
+        "pcm_s16le",
+        "-ar",
+        "48000",
+        "-ac",
+        "2",
+        "-f",
+        "dv"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "ffv1",
+     "title": "FFV1 (lossless)",
+     "ext": "mkv",
+     "family": "video",
+     "variants": [
+      {
+       "needs": [
+        "ffv1",
+        "flac"
+       ],
+       "args": [
+        "-c:v",
+        "ffv1",
+        "-level",
+        "3",
+        "-c:a",
+        "flac"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "huffyuv",
+     "title": "HuffYUV (lossless AVI)",
+     "ext": "avi",
+     "family": "video",
+     "variants": [
+      {
+       "needs": [
+        "huffyuv",
+        "pcm_s16le"
+       ],
+       "args": [
+        "-c:v",
+        "huffyuv",
+        "-c:a",
+        "pcm_s16le"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "mpeg1",
+     "title": "MPEG-1",
+     "ext": "mpg",
+     "family": "video",
+     "variants": [
+      {
+       "needs": [
+        "mpeg1video",
+        "mp2"
+       ],
+       "args": {
+        "best": [
+         "-c:v",
+         "mpeg1video",
+         "-q:v",
+         "2",
+         "-pix_fmt",
+         "yuv420p",
+         "-fpsmax",
+         "30",
+         "-c:a",
+         "mp2",
+         "-b:a",
+         "224k",
+         "-f",
+         "mpeg"
+        ],
+        "balanced": [
+         "-c:v",
+         "mpeg1video",
+         "-q:v",
+         "4",
+         "-pix_fmt",
+         "yuv420p",
+         "-fpsmax",
+         "30",
+         "-c:a",
+         "mp2",
+         "-b:a",
+         "192k",
+         "-f",
+         "mpeg"
+        ],
+        "small": [
+         "-c:v",
+         "mpeg1video",
+         "-q:v",
+         "7",
+         "-pix_fmt",
+         "yuv420p",
+         "-fpsmax",
+         "30",
+         "-c:a",
+         "mp2",
+         "-b:a",
+         "128k",
+         "-f",
+         "mpeg"
+        ]
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "pack.vintage-video",
+   "title": "Vintage Video",
+   "subtitle": "RealMedia, DivX 3 and Flash-era Sorenson video for retro projects.",
+   "category": "video",
+   "symbol": "tv.fill",
+   "tint": "red",
+   "version": "1.0",
+   "sizeMb": 0.01,
+   "license": "Free",
+   "author": "Morph",
+   "requires": [
+    "ffmpeg"
+   ],
+   "inputs": [
+    "rm",
+    "rmvb",
+    "vob"
+   ],
+   "formats": [
+    {
+     "id": "realmedia",
+     "title": "RealMedia",
+     "ext": "rm",
+     "family": "video",
+     "variants": [
+      {
+       "needs": [
+        "rv20",
+        "ac3"
+       ],
+       "args": {
+        "best": [
+         "-vf",
+         "{scale},scale='trunc(iw/4)*4':'trunc(ih/4)*4'",
+         "-c:v",
+         "rv20",
+         "-q:v",
+         "3",
+         "-c:a",
+         "ac3",
+         "-b:a",
+         "192k",
+         "-f",
+         "rm"
+        ],
+        "balanced": [
+         "-vf",
+         "{scale},scale='trunc(iw/4)*4':'trunc(ih/4)*4'",
+         "-c:v",
+         "rv20",
+         "-q:v",
+         "6",
+         "-c:a",
+         "ac3",
+         "-b:a",
+         "160k",
+         "-f",
+         "rm"
+        ],
+        "small": [
+         "-vf",
+         "{scale},scale='trunc(iw/4)*4':'trunc(ih/4)*4'",
+         "-c:v",
+         "rv20",
+         "-q:v",
+         "10",
+         "-c:a",
+         "ac3",
+         "-b:a",
+         "128k",
+         "-f",
+         "rm"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "id": "divx3",
+     "title": "DivX 3 (AVI)",
+     "ext": "avi",
+     "family": "video",
+     "variants": [
+      {
+       "needs": [
+        "msmpeg4",
+        "libmp3lame"
+       ],
+       "args": {
+        "best": [
+         "-c:v",
+         "msmpeg4",
+         "-vtag",
+         "DIV3",
+         "-q:v",
+         "2",
+         "-c:a",
+         "libmp3lame",
+         "-b:a",
+         "192k"
+        ],
+        "balanced": [
+         "-c:v",
+         "msmpeg4",
+         "-vtag",
+         "DIV3",
+         "-q:v",
+         "5",
+         "-c:a",
+         "libmp3lame",
+         "-b:a",
+         "128k"
+        ],
+        "small": [
+         "-c:v",
+         "msmpeg4",
+         "-vtag",
+         "DIV3",
+         "-q:v",
+         "9",
+         "-c:a",
+         "libmp3lame",
+         "-b:a",
+         "96k"
+        ]
+       }
+      },
+      {
+       "needs": [
+        "msmpeg4"
+       ],
+       "args": {
+        "best": [
+         "-c:v",
+         "msmpeg4",
+         "-vtag",
+         "DIV3",
+         "-q:v",
+         "2",
+         "-c:a",
+         "ac3",
+         "-b:a",
+         "192k"
+        ],
+        "balanced": [
+         "-c:v",
+         "msmpeg4",
+         "-vtag",
+         "DIV3",
+         "-q:v",
+         "5",
+         "-c:a",
+         "ac3",
+         "-b:a",
+         "192k"
+        ],
+        "small": [
+         "-c:v",
+         "msmpeg4",
+         "-vtag",
+         "DIV3",
+         "-q:v",
+         "9",
+         "-c:a",
+         "ac3",
+         "-b:a",
+         "192k"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "id": "flvsorenson",
+     "title": "FLV (Sorenson H.263)",
+     "ext": "flv",
+     "family": "video",
+     "variants": [
+      {
+       "needs": [
+        "flv",
+        "libmp3lame"
+       ],
+       "args": {
+        "best": [
+         "-c:v",
+         "flv",
+         "-q:v",
+         "2",
+         "-c:a",
+         "libmp3lame",
+         "-b:a",
+         "192k",
+         "-ar",
+         "44100",
+         "-f",
+         "flv"
+        ],
+        "balanced": [
+         "-c:v",
+         "flv",
+         "-q:v",
+         "5",
+         "-c:a",
+         "libmp3lame",
+         "-b:a",
+         "128k",
+         "-ar",
+         "44100",
+         "-f",
+         "flv"
+        ],
+        "small": [
+         "-c:v",
+         "flv",
+         "-q:v",
+         "9",
+         "-c:a",
+         "libmp3lame",
+         "-b:a",
+         "96k",
+         "-ar",
+         "44100",
+         "-f",
+         "flv"
+        ]
+       }
+      },
+      {
+       "needs": [
+        "flv",
+        "adpcm_swf"
+       ],
+       "args": {
+        "best": [
+         "-c:v",
+         "flv",
+         "-q:v",
+         "2",
+         "-c:a",
+         "adpcm_swf",
+         "-ar",
+         "44100",
+         "-f",
+         "flv"
+        ],
+        "balanced": [
+         "-c:v",
+         "flv",
+         "-q:v",
+         "5",
+         "-c:a",
+         "adpcm_swf",
+         "-ar",
+         "44100",
+         "-f",
+         "flv"
+        ],
+        "small": [
+         "-c:v",
+         "flv",
+         "-q:v",
+         "9",
+         "-c:a",
+         "adpcm_swf",
+         "-ar",
+         "44100",
+         "-f",
+         "flv"
+        ]
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "pack.phone-retro-audio",
+   "title": "Telephone & Retro Audio",
+   "subtitle": "G.722, mu-law, A-law and IMA ADPCM, plus Wave64. Opens AMR and Musepack too.",
+   "category": "audio",
+   "symbol": "phone.fill",
+   "tint": "green",
+   "version": "1.0",
+   "sizeMb": 0.01,
+   "license": "Free",
+   "author": "Morph",
+   "requires": [
+    "ffmpeg"
+   ],
+   "inputs": [
+    "amr",
+    "awb",
+    "mpc",
+    "gsm",
+    "g722"
+   ],
+   "formats": [
+    {
+     "id": "g722",
+     "title": "G.722 (wideband voice)",
+     "ext": "g722",
+     "family": "audio",
+     "variants": [
+      {
+       "needs": [
+        "g722"
+       ],
+       "args": [
+        "-vn",
+        "-c:a",
+        "g722",
+        "-ar",
+        "16000",
+        "-ac",
+        "1",
+        "-f",
+        "g722"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "mulaw",
+     "title": "WAV (µ-law)",
+     "ext": "wav",
+     "family": "audio",
+     "variants": [
+      {
+       "needs": [
+        "pcm_mulaw"
+       ],
+       "args": [
+        "-vn",
+        "-c:a",
+        "pcm_mulaw",
+        "-ar",
+        "8000",
+        "-ac",
+        "1",
+        "-f",
+        "wav"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "alaw",
+     "title": "WAV (A-law)",
+     "ext": "wav",
+     "family": "audio",
+     "variants": [
+      {
+       "needs": [
+        "pcm_alaw"
+       ],
+       "args": [
+        "-vn",
+        "-c:a",
+        "pcm_alaw",
+        "-ar",
+        "8000",
+        "-ac",
+        "1",
+        "-f",
+        "wav"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "imawav",
+     "title": "WAV (IMA ADPCM)",
+     "ext": "wav",
+     "family": "audio",
+     "variants": [
+      {
+       "needs": [
+        "adpcm_ima_wav"
+       ],
+       "args": [
+        "-vn",
+        "-c:a",
+        "adpcm_ima_wav",
+        "-f",
+        "wav"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "w64",
+     "title": "Wave64 (W64)",
+     "ext": "w64",
+     "family": "audio",
+     "variants": [
+      {
+       "needs": [
+        "pcm_s16le",
+        "pcm_s24le"
+       ],
+       "args": {
+        "best": [
+         "-vn",
+         "-c:a",
+         "pcm_s24le",
+         "-f",
+         "w64"
+        ],
+        "balanced": [
+         "-vn",
+         "-c:a",
+         "pcm_s16le",
+         "-f",
+         "w64"
+        ],
+        "small": [
+         "-vn",
+         "-c:a",
+         "pcm_s16le",
+         "-f",
+         "w64"
+        ]
+       }
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
